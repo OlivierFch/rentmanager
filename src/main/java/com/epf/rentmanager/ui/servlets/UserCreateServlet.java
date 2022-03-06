@@ -22,7 +22,7 @@ public class UserCreateServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 
-	private static final String VUE_CARS = "/WEB-INF/views/vehicles/list.jsp";
+	private static final String VUE_USERS = "/WEB-INF/views/users/list.jsp";
 	private static final String VUE_CREATE_USERS ="/WEB-INF/views/users/create.jsp";
 	
 	@Autowired
@@ -59,7 +59,7 @@ public class UserCreateServlet extends HttpServlet {
 			
 		} catch (ServiceException e) {
 			e.printStackTrace();
-			request.getServletContext().getRequestDispatcher(VUE_CARS).forward(request, response); // Rester dans la page si erreur
+			request.getServletContext().getRequestDispatcher(VUE_USERS).forward(request, response); // Rester dans la page si erreur
 		}
 		
 	}

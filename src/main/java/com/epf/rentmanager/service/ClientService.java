@@ -71,4 +71,15 @@ public class ClientService {
 		
 	}
 	
+	public boolean updateClient(Client client) throws ServiceException {
+		
+		try {
+			return this.clientDao.updateClient(client);
+		} catch (DaoException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
 }
