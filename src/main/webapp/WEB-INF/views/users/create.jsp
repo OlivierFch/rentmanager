@@ -52,7 +52,7 @@
                                     <label for="email" class="col-sm-2 control-label">Date de naissance</label>
 
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="birthdate" name="birthdate" placeholder="birthdate">
+                                        <input type="date" class="form-control" id="birthdate" name="birthdate" placeholder="birthdate">
                                     </div>
                                 </div>
                             </div>
