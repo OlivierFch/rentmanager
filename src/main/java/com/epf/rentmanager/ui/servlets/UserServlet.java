@@ -18,7 +18,8 @@ import com.epf.rentmanager.service.ClientService;
 public class UserServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-
+	private static final String VUE_USERS = "/WEB-INF/views/users/list.jsp";
+	
 	@Autowired
 	ClientService clientService;
 
@@ -28,7 +29,6 @@ public class UserServlet extends HttpServlet {
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 	}
 
-	private static final String VUE_USERS = "/WEB-INF/views/users/list.jsp";
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -36,8 +36,7 @@ public class UserServlet extends HttpServlet {
 
 		try {
 
-			request.setAttribute("listUsers", this.clientService.findAll()); // List<Client>
-
+			request.setAttribute("listUsers", this.clientService.findAll());
 			this.getServletContext().getRequestDispatcher(VUE_USERS).forward(request, response);
 
 		} catch (ServiceException e) {

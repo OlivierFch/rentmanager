@@ -1,12 +1,11 @@
 package com.epf.rentmanager.model;
 
 public class Vehicle {
-	private int id;
+	private long id;
 	private String constructor;
-	private String model;
 	private int nbPlaces;
 
-	public Vehicle(int id, String constructor, int nbPlaces) {
+	public Vehicle(long id, String constructor, int nbPlaces) {
 		super();
 		this.id = id;
 		this.constructor = constructor;
@@ -14,12 +13,18 @@ public class Vehicle {
 	}
 	
 	
+	public Vehicle(String constructor, int nbPlaces) {
+		super();
+		this.constructor = constructor;
+		this.nbPlaces = nbPlaces;
+	}
 
-	public int getId() {
+
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -29,14 +34,6 @@ public class Vehicle {
 
 	public void setConstructor(String constructor) {
 		this.constructor = constructor;
-	}
-
-	public String getModel() {
-		return model;
-	}
-
-	public void setModel(String model) {
-		this.model = model;
 	}
 
 	public int getNbPlaces() {
@@ -49,7 +46,7 @@ public class Vehicle {
 
 	@Override
 	public String toString() {
-		return "Vehicle [id=" + id + ", constructor=" + constructor + ", model=" + model + ", nbPlaces=" + nbPlaces
+		return "Vehicle [id=" + id + ", constructor=" + constructor + ", nbPlaces=" + nbPlaces
 				+ "]";
 	}
 

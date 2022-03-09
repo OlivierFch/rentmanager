@@ -21,8 +21,6 @@ import com.epf.rentmanager.service.ClientService;
 public class UserCreateServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-
-	private static final String VUE_USERS = "/WEB-INF/views/users/list.jsp";
 	private static final String VUE_CREATE_USERS ="/WEB-INF/views/users/create.jsp";
 	
 	@Autowired
@@ -42,8 +40,8 @@ public class UserCreateServlet extends HttpServlet {
 		
 	}
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse
-			response) throws ServletException, IOException {
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String lastname = request.getParameter("lastname");
 		String firstname = request.getParameter("firstname");
@@ -59,7 +57,7 @@ public class UserCreateServlet extends HttpServlet {
 			
 		} catch (ServiceException e) {
 			e.printStackTrace();
-			request.getServletContext().getRequestDispatcher(VUE_USERS).forward(request, response); // Rester dans la page si erreur
+			request.getServletContext().getRequestDispatcher(VUE_CREATE_USERS).forward(request, response);
 		}
 		
 	}

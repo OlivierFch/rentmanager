@@ -2,7 +2,6 @@ package com.epf.rentmanager.ui.servlets;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,12 +14,12 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import com.epf.rentmanager.exception.ServiceException;
 import com.epf.rentmanager.service.VehicleService;
 
-@WebServlet("/cars")
-public class VehicleListServlet extends HttpServlet {
+@WebServlet("/cars/delete")
+public class VehicleDeleteServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private static final String VUE_CARS = "/WEB-INF/views/vehicles/list.jsp";
-
+	private int id;
+	
 	@Autowired
 	VehicleService vehicleService;
 
@@ -29,20 +28,20 @@ public class VehicleListServlet extends HttpServlet {
 		super.init();
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 	}
-
 	
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		id = Integer.valueOf(request.getQueryString().substring(3));
+		
 		try {
-
-			request.setAttribute("vehicles", this.vehicleService.findAll());
-			this.getServletContext().getRequestDispatcher(VUE_CARS).forward(request, response);
-
+			
+			vehicleService.delete(id);
+			response.sendRedirect("/rentmanager/cars");
+			
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
-
 	}
+	
 }

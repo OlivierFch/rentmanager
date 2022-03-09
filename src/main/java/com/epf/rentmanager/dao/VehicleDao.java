@@ -27,6 +27,7 @@ public class VehicleDao {
 	private static final String FIND_VEHICLE_QUERY = "SELECT id, constructeur, nb_places FROM Vehicle WHERE id=?;";
 	private static final String FIND_VEHICLES_QUERY = "SELECT id, constructeur, nb_places FROM Vehicle;";
 	private static final String COUNT_VEHICLES_QUERY = "SELECT COUNT(*) FROM Vehicle";
+	private static final String UPDATE_VEHICLE_QUERY = "UPDATE Vehicle SET constructeur = ?, nb_places = ? WHERE id = ?;";
 	
 public int countAllVehicle() throws DaoException {
 		
@@ -58,101 +59,112 @@ public int countAllVehicle() throws DaoException {
 	public long create(Vehicle vehicle) throws DaoException {
 		
 		try {
-			
 			Connection conn = ConnectionManager.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(CREATE_VEHICLE_QUERY);
+			PreparedStatement pstmt = conn.prepareStatement(CREATE_VEHICLE_QUERY, Statement.RETURN_GENERATED_KEYS);
 			
 			pstmt.setString(1, vehicle.getConstructor());
-			pstmt.setString(2, vehicle.getModel());
-			pstmt.setInt(3, vehicle.getNbPlaces());
+			pstmt.setInt(2, vehicle.getNbPlaces());
 			
-			pstmt.execute();
+			long status = pstmt.executeUpdate();
 			
 			conn.close();
+			return status;
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return 0;
+			throw new DaoException();
+		}	
 	}
 
-	public long delete(int id) throws DaoException {
+	
+	public long delete(long id) throws DaoException {
 		
 		try {
 			
 			Connection conn = ConnectionManager.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(DELETE_VEHICLE_QUERY);
+			PreparedStatement pstmt = conn.prepareStatement(DELETE_VEHICLE_QUERY, Statement.RETURN_GENERATED_KEYS);
 			
-			pstmt.setInt(1, id);
-			pstmt.executeUpdate();
+			pstmt.setLong(1, id);
+			long status = pstmt.executeUpdate();
 			
 			conn.close();
 			
-			return -1;
+			return status;
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return 0;
-		
+			throw new DaoException();
+		}		
 	}
 
-	public Optional<Vehicle> findById(int id) throws DaoException {
+	
+	public Optional<Vehicle> findById(long id) throws DaoException {
 		
 		try {
 			
 			Connection conn = ConnectionManager.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(FIND_VEHICLE_QUERY);
 			
-			pstmt.setInt(1, id);
+			pstmt.setLong(1, id);
 			
 			ResultSet rs = pstmt.executeQuery();
 			rs.next();
 			
-			Vehicle vehicle = new Vehicle(id, rs.getString("constructor"), rs.getInt("nbPlaces"));
+			Vehicle vehicle = new Vehicle(id, rs.getString("constructeur"), rs.getByte("nb_places"));
 			
 			conn.close();
 			
 			return Optional.of(vehicle);
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new DaoException();
 		}
-		
-		return null;
 	}
 
+	
 	public List<Vehicle> findAll() throws DaoException {
 		
 		List<Vehicle> vehicles = new ArrayList<>();
 		
 		try {
-			
 			Connection conn = ConnectionManager.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(FIND_VEHICLES_QUERY);
 			ResultSet rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
 				
-				int vehicleId = rs.getInt("id");
-				Vehicle vehicle = new Vehicle(vehicleId, rs.getString("constructeur"), rs.getInt("nb_places"));
+				long vehicleId = rs.getLong("id");
+				String carContructor = rs.getString("constructeur");
+				int carSeats = rs.getByte("nb_places");
+				
+				Vehicle vehicle = new Vehicle(vehicleId, carContructor, carSeats);
 				
 				vehicles.add(vehicle);
 			}
 			
 			conn.close();
-			
 			return vehicles;
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return null;
-		
+			throw new DaoException();
+		}		
 	}
 	
+	
+	public long updateVehicle(Vehicle vehicle) throws DaoException {
+		
+		try (Connection conn = ConnectionManager.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(UPDATE_VEHICLE_QUERY, Statement.RETURN_GENERATED_KEYS);) {
+			
+			pstmt.setString(1, vehicle.getConstructor());
+			pstmt.setInt(2, vehicle.getNbPlaces());
+			pstmt.setLong(3, vehicle.getId());
+			
+			long status = pstmt.executeUpdate();
+			conn.close();
+			
+			return status;
+		} catch (SQLException e) {
+			throw new DaoException();
+		}
+	}
 
 }

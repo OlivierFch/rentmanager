@@ -20,7 +20,9 @@ D:\Dev\JavaProjects\rentmanager\src\main\java\com\epf\rentmanager\Main\Main.java
 D:\Dev\JavaProjects\rentmanager\src\main\java\com\epf\rentmanager\ui\servlets\UserEditServlet.java
 D:\Dev\JavaProjects\rentmanager\src\main\java\com\epf\rentmanager\utils\IOUtils.java
 D:\Dev\JavaProjects\rentmanager\src\main\java\com\epf\rentmanager\persistence\FillDatabase.java
+D:\Dev\JavaProjects\rentmanager\src\main\java\com\epf\rentmanager\ui\servlets\VehicleEditServlet.java
 D:\Dev\JavaProjects\rentmanager\src\main\java\com\epf\rentmanager\Configuration\AppConfiguration.java
 D:\Dev\JavaProjects\rentmanager\src\main\java\com\epf\rentmanager\ui\servlets\UserServlet.java
 D:\Dev\JavaProjects\rentmanager\src\main\java\com\epf\rentmanager\ui\servlets\HomeServlet.java
 D:\Dev\JavaProjects\rentmanager\src\main\java\com\epf\rentmanager\ui\servlets\RentListServlet.java
+D:\Dev\JavaProjects\rentmanager\src\main\java\com\epf\rentmanager\ui\servlets\VehicleDeleteServlet.java

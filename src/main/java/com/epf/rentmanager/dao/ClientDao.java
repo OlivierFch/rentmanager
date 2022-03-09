@@ -139,7 +139,7 @@ public class ClientDao {
 			
 			while (rs.next()) {
 				
-				long clientId = rs.getInt("id");
+				long clientId = rs.getLong("id");
 				String clientLastname = rs.getString("nom");
 				String clientFirstname = rs.getString("prenom");
 				String clientEmail = rs.getString("email");
@@ -151,15 +151,11 @@ public class ClientDao {
 			}
 			
 			conn.close();
-			
 			return clients;
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new DaoException();
 		}
-		
-		return clients;
-
 	}
 	
 	public long updateClient(Client client) throws DaoException {
@@ -182,9 +178,6 @@ public class ClientDao {
 		} catch (SQLException e) {
 			throw new DaoException();
 		}
-	
-		
-		
 	}
 
 }

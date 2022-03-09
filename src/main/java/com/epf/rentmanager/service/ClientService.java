@@ -66,6 +66,7 @@ public class ClientService {
 
 	
 	public List<Client> findAll() throws ServiceException {
+		
 		try {
 			return this.clientDao.findAll();
 		} catch (DaoException e) {
@@ -73,8 +74,8 @@ public class ClientService {
 		}
 		
 		return null;
-		
 	}
+	
 	
 	public long updateClient(Client client) throws ServiceException {
 		
