@@ -4,27 +4,28 @@ import java.time.LocalDate;
 
 public class Reservation {
 	private int id;
-	private int idVehicule;
 	private int idClient;
-	private LocalDate dateStart;
-	private LocalDate dateEnd;
+	private int idVehicle;
+	private LocalDate debut;
+	private LocalDate end;
 
-	public Reservation(int id, int idVehicule, int idClient, LocalDate dateStart, LocalDate dateEnd) {
-		super();
+	public Reservation(int id, int idClient, int idVehicle, LocalDate debut, LocalDate end) {
 		this.id = id;
-		this.idVehicule = idVehicule;
 		this.idClient = idClient;
-		this.dateStart = dateStart;
-		this.dateEnd = dateEnd;
+		this.idVehicle = idVehicle;
+		this.debut = debut;
+		this.end = end;
 	}
 	
-
-	public Reservation(int id, int idVehicule, LocalDate dateStart, LocalDate dateEnd) {
-		super();
+	public Reservation(int id) {
 		this.id = id;
-		this.idVehicule = idVehicule;
-		this.dateStart = dateStart;
-		this.dateEnd = dateEnd;
+	}
+
+	public Reservation(int idClient, int idVehicle, LocalDate debut, LocalDate end) {
+		this.idClient = idClient;
+		this.idVehicle = idVehicle;
+		this.debut = debut;
+		this.end = end;
 	}
 
 
@@ -36,12 +37,12 @@ public class Reservation {
 		this.id = id;
 	}
 
-	public int getIdVehicule() {
-		return idVehicule;
+	public int getIdVehicle() {
+		return idVehicle;
 	}
 
-	public void setIdVehicule(int idVehicule) {
-		this.idVehicule = idVehicule;
+	public void setIdVehicle(int idVehicle) {
+		this.idVehicle = idVehicle;
 	}
 
 	public int getIdClient() {
@@ -52,26 +53,53 @@ public class Reservation {
 		this.idClient = idClient;
 	}
 
-	public LocalDate getDateStart() {
-		return dateStart;
+	public LocalDate getDebut() {
+		return debut;
 	}
 
-	public void setDateStart(LocalDate dateStart) {
-		this.dateStart = dateStart;
+	public void setDebut(LocalDate debut) {
+		this.debut = debut;
 	}
 
-	public LocalDate getDateEnd() {
-		return dateEnd;
+	public LocalDate getEnd() {
+		return end;
 	}
 
-	public void setDateEnd(LocalDate dateEnd) {
-		this.dateEnd = dateEnd;
+	public void setEnd(LocalDate end) {
+		this.end = end;
 	}
+	
+	
+	public Reservation idClient(int idClient) {
+		setIdClient(idClient);
+		return this;
+	}
+	
+	public Reservation idVehicle(int idVehicle) {
+		setIdVehicle(idVehicle);
+		return this;
+	}
+	
+	public Reservation debut(LocalDate debut) {
+		setDebut(debut);
+		return this;
+	}
+	
+	public Reservation end(LocalDate end) {
+		setEnd(end);
+		return this;
+	}
+	
 
 	@Override
 	public String toString() {
-		return "Reservation [id=" + id + ", idVehicule=" + idVehicule + ", idClient=" + idClient + ", dateStart="
-				+ dateStart + ", dateEnd=" + dateEnd + "]";
+		return "{" +
+                " id='" + getId() + "'" +
+                ", idClient='" + getIdClient() + "'" +
+                ", idVehicle='" + getIdVehicle() + "'" +
+                ", debut='" + getDebut() + "'" +
+                ", end='" + getEnd() + "'" +
+                "}";
 	}
 	
 }

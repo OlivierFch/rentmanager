@@ -2,6 +2,7 @@ package com.epf.rentmanager.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.epf.rentmanager.dao.ReservationDao;
@@ -14,6 +15,7 @@ public class ReservationService {
 	
 	private ReservationDao reservationDao;
 	
+	@Autowired
 	private ReservationService(ReservationDao reservationDao) {
 		this.reservationDao = reservationDao;
 	}
@@ -30,10 +32,10 @@ public class ReservationService {
 		return 0;
 	}
 	
-	public long delete(int id) throws ServiceException {
+	public long delete(Reservation reservation) throws ServiceException {
 		
 		try {
-			return this.reservationDao.delete(id);
+			return this.reservationDao.delete(reservation);
 		} catch (DaoException e) {
 			e.printStackTrace();
 		}
@@ -41,10 +43,10 @@ public class ReservationService {
 		return 0;
 	}
 	
-	public Reservation findReservationByClientId(int id) throws ServiceException {
+	public List<Reservation> findReservationByClientId(long id) throws ServiceException {
 		
 		try {
-			return this.reservationDao.findResaByClientId(id).get();
+			return this.reservationDao.findResaByClientId(id);
 		} catch (DaoException e) {
 			e.printStackTrace();
 		}
@@ -52,10 +54,10 @@ public class ReservationService {
 		return null;
 	}
 	
-	public Reservation findReservationByVehiculeId(int id) throws ServiceException {
+	public List<Reservation> findReservationByVehiculeId(long id) throws ServiceException {
 		
 		try {
-			return this.reservationDao.findResaByVehicleId(id).get();
+			return this.reservationDao.findResaByVehicleId(id);
 		} catch (DaoException e) {
 			e.printStackTrace();
 		}
@@ -72,5 +74,19 @@ public class ReservationService {
 		}
 		
 		return null;
+	}
+	
+	
+	public int countAll() throws ServiceException {
+		
+		try {
+			
+			return this.reservationDao.countAllReservation();
+			
+		} catch (DaoException e) {
+			e.printStackTrace();
+		}
+		
+		return 0;
 	}
 }

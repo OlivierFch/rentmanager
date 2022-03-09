@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+import com.epf.rentmanager.exception.ServiceException;
 import com.epf.rentmanager.service.ClientService;
 import com.epf.rentmanager.service.ReservationService;
 import com.epf.rentmanager.service.VehicleService;
@@ -41,8 +42,16 @@ public class HomeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		request.setAttribute("countClient", this.clientService.countAll());
-		request.setAttribute("countVehicle", this.vehicleService.countAll());
+		
+		try {
+			
+			request.setAttribute("countClient", this.clientService.countAll());
+			request.setAttribute("countVehicle", this.vehicleService.countAll());
+			request.setAttribute("countReservation", this.reservationService.countAll());
+			
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
 		
 		request.getRequestDispatcher(VUE_HOME).forward(request, response);
 
