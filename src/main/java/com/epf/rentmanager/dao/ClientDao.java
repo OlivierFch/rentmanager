@@ -51,7 +51,7 @@ public class ClientDao {
 			conn.close();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new DaoException();
 		}
 		
 		
@@ -60,55 +60,52 @@ public class ClientDao {
 	
 	public long create(Client client) throws DaoException {
 		
-		int id = 0;
-		
 		try {
 			Connection conn = ConnectionManager.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(CREATE_CLIENT_QUERY,	id = Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement pstmt = conn.prepareStatement(CREATE_CLIENT_QUERY, Statement.RETURN_GENERATED_KEYS);
 			
 			pstmt.setString(1, client.getLastname());
 			pstmt.setString(2, client.getFirstname());
 			pstmt.setString(3, client.getEmail());
 			pstmt.setDate(4, Date.valueOf(client.getBirthdate()));
 			
-			pstmt.execute();
+			long status = pstmt.executeUpdate();
 			
 			conn.close();
+			return status;
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new DaoException();
 		}
 		
-		return id;
 	}
 
-	public long delete(int id) throws DaoException {
+	public long delete(long id) throws DaoException {
 		
 		try {
 			Connection conn = ConnectionManager.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(DELETE_CLIENT_QUERY);
+			PreparedStatement pstmt = conn.prepareStatement(DELETE_CLIENT_QUERY, Statement.RETURN_GENERATED_KEYS);
 			
-			pstmt.setInt(1, id);
-			pstmt.executeUpdate();
+			pstmt.setLong(1, id);
 			
+			long key = pstmt.executeUpdate();
 			conn.close();
 			
-			return -1;
+			return key;
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new DaoException();
 		}
 		
-		return 0;
 	}
 
-	public Optional<Client> findById(int id) throws DaoException {
+	public Optional<Client> findById(long id) throws DaoException {
 		
 		try {
 			Connection conn = ConnectionManager.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(FIND_CLIENT_QUERY);
 			
-			pstmt.setInt(1, id);
+			pstmt.setLong(1, id);
 		
 			ResultSet rs = pstmt.executeQuery();
 			rs.next();
@@ -117,22 +114,20 @@ public class ClientDao {
 			String clientFirstname = rs.getString("prenom");
 			String clientEmail = rs.getString("email");
 			LocalDate clientBirthdate = rs.getDate("naissance").toLocalDate();
-			
 			Client client = new Client(id, clientLastname, clientFirstname, clientEmail, clientBirthdate);
 			
 			conn.close();
 			
-			return Optional.of(client); // ou aussi Optional.ofNullable(client)
+			return Optional.of(client);
 			
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new DaoException();
 		}
-		
-		return Optional.empty();
 		
 	}
 
+	
 	public List<Client> findAll() throws DaoException {
 		 
 		List<Client> clients = new ArrayList<>();
@@ -144,7 +139,7 @@ public class ClientDao {
 			
 			while (rs.next()) {
 				
-				int clientId = rs.getInt("id");
+				long clientId = rs.getInt("id");
 				String clientLastname = rs.getString("nom");
 				String clientFirstname = rs.getString("prenom");
 				String clientEmail = rs.getString("email");
@@ -167,25 +162,29 @@ public class ClientDao {
 
 	}
 	
-	public boolean updateClient(Client client) throws DaoException {
+	public long updateClient(Client client) throws DaoException {
 		
-		boolean rowUpdated = false;
 		try (Connection conn = ConnectionManager.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(UPDATE_CLIENT_QUERY);) {
+				PreparedStatement pstmt = conn.prepareStatement(UPDATE_CLIENT_QUERY, Statement.RETURN_GENERATED_KEYS);) {
 			
-			pstmt.setInt(1, client.getId());
-			pstmt.setString(2, client.getLastname());
-			pstmt.setString(3, client.getFirstname());
-			pstmt.setString(4, client.getEmail());
-			pstmt.setDate(5, Date.valueOf(client.getBirthdate()));
+			pstmt.setString(1, client.getLastname());
+			pstmt.setString(2, client.getFirstname());
+			pstmt.setString(3, client.getEmail());
+			pstmt.setDate(4, Date.valueOf(client.getBirthdate()));
+			pstmt.setLong(5, client.getId());
 			
-			rowUpdated = pstmt.executeUpdate() > 0;
+			long status = pstmt.executeUpdate();
 			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+			conn.close();
+			
+			return status;
 		
-		return rowUpdated;
+		} catch (SQLException e) {
+			throw new DaoException();
+		}
+	
+		
+		
 	}
 
 }

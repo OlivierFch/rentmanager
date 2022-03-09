@@ -1,6 +1,8 @@
 package com.epf.rentmanager.ui.servlets;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Optional;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,9 +21,6 @@ import com.epf.rentmanager.service.ClientService;
 public class UserEditServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private int id;
-
-	private static final String VUE_USERS = "/WEB-INF/views/users/list.jsp";
 	private static final String VUE_EDIT_USERS = "/WEB-INF/views/users/edit.jsp";
 
 	@Autowired
@@ -36,24 +35,34 @@ public class UserEditServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		this.getServletContext().getRequestDispatcher(VUE_EDIT_USERS).forward(request, response);
+		try {
+			long id = Long.parseLong(request.getParameter("id"));
+			Optional<Client> client = clientService.findById(id);
+			request.setAttribute("user", client.get());
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
 
+		request.getServletContext().getRequestDispatcher(VUE_EDIT_USERS).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		id = Integer.valueOf(request.getQueryString().substring(3));
+		String lastname = request.getParameter("lastname");
+		String firstname = request.getParameter("firstname");
+		String email = request.getParameter("email");
+		LocalDate birthdate = LocalDate.parse(request.getParameter("birthdate"));
+
+		Client client = new Client(Integer.parseInt(request.getParameter("id")), lastname, firstname, email, birthdate);
 
 		try {
 
-			Client existingUser = clientService.findById(id);
-			clientService.updateClient(existingUser);
-			response.sendRedirect("/rentmanager/users");
+			clientService.updateClient(client);
 
 		} catch (ServiceException e) {
 			e.printStackTrace();
-			request.getServletContext().getRequestDispatcher(VUE_USERS).forward(request, response);
 		}
+		response.sendRedirect("/rentmanager/users");
 	}
 }

@@ -1,7 +1,9 @@
 package com.epf.rentmanager.service;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.epf.rentmanager.exception.DaoException;
@@ -14,6 +16,7 @@ public class ClientService {
 
 	private ClientDao clientDao;
 	
+	@Autowired
 	private ClientService(ClientDao clientDao) {
 		this.clientDao = clientDao;
 	}
@@ -39,7 +42,7 @@ public class ClientService {
 		return 0;		
 	}
 	
-	public long delete(int id) throws ServiceException {
+	public long delete(long id) throws ServiceException {
 		
 		try {
 			return this.clientDao.delete(id);
@@ -49,17 +52,19 @@ public class ClientService {
 		
 		return 0;
 	}
+	
 
-	public Client findById(int id) throws ServiceException {
+	public Optional<Client> findById(long id) throws ServiceException {
 		try {
-			return this.clientDao.findById(id).get();
+			return this.clientDao.findById(id);
 		} catch (DaoException e) {
 			e.printStackTrace();
 		}
 		
-		return null;
+		return Optional.empty();
 	}
 
+	
 	public List<Client> findAll() throws ServiceException {
 		try {
 			return this.clientDao.findAll();
@@ -71,7 +76,7 @@ public class ClientService {
 		
 	}
 	
-	public boolean updateClient(Client client) throws ServiceException {
+	public long updateClient(Client client) throws ServiceException {
 		
 		try {
 			return this.clientDao.updateClient(client);
@@ -79,7 +84,7 @@ public class ClientService {
 			e.printStackTrace();
 		}
 		
-		return false;
+		return 0;
 	}
 	
 }

@@ -3,13 +3,13 @@ package com.epf.rentmanager.model;
 import java.time.LocalDate;
 
 public class Client {
-	private int id;
+	private long id;
 	private String firstname;
 	private String lastname;
 	private String email;
 	private LocalDate birthdate;
 
-	public Client(int id, String firstname, String lastname, String email, LocalDate birthdate) {
+	public Client(long id, String firstname, String lastname, String email, LocalDate birthdate) {
 		super();
 		this.id = id;
 		this.firstname = firstname;
@@ -29,11 +29,11 @@ public class Client {
 	
 
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
