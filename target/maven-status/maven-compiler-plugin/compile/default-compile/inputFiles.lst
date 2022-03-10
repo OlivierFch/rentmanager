@@ -11,6 +11,7 @@ D:\Dev\JavaProjects\rentmanager\src\main\java\com\epf\rentmanager\dao\ClientDao.
 D:\Dev\JavaProjects\rentmanager\src\main\java\com\epf\rentmanager\ui\servlets\UserDetailsServlet.java
 D:\Dev\JavaProjects\rentmanager\src\main\java\com\epf\rentmanager\service\VehicleService.java
 D:\Dev\JavaProjects\rentmanager\src\main\java\com\epf\rentmanager\ui\servlets\UserDeleteServlet.java
+D:\Dev\JavaProjects\rentmanager\src\main\java\com\epf\rentmanager\ui\servlets\RentDeleteServlet.java
 D:\Dev\JavaProjects\rentmanager\src\main\java\com\epf\rentmanager\service\ClientService.java
 D:\Dev\JavaProjects\rentmanager\src\main\java\com\epf\rentmanager\exception\ServiceException.java
 D:\Dev\JavaProjects\rentmanager\src\main\java\com\epf\rentmanager\model\Client.java
