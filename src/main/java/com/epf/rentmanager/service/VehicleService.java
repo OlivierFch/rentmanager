@@ -87,4 +87,16 @@ public class VehicleService {
 		return 0;
 	}
 	
+	
+	public List<Vehicle> findvehicleByClientId (long id) throws ServiceException {
+		
+		try {
+			return this.vehicleDao.findvehicleByClientId(id);
+		} catch (DaoException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
 }
