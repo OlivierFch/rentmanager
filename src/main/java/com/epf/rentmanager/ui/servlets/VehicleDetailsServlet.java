@@ -42,10 +42,11 @@ public class VehicleDetailsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
         	
+        	int id = Integer.parseInt(request.getParameter("id"));
             request.setAttribute("res", reservationService.findReservationByVehiculeId(Integer.parseInt(request.getParameter("id"))));
-            request.setAttribute("vehicule", Integer.parseInt(request.getParameter("id")));
-            request.setAttribute("users", clientService.findAll());
-            request.setAttribute("cars", vehicleService.findAll());
+            request.setAttribute("vehicule", vehicleService.findById(id).get());
+            request.setAttribute("listUsers", clientService.findAll());
+            request.setAttribute("users", clientService.findClientByVehicleId(id));
             
         } catch (NumberFormatException | ServiceException e) {
             e.printStackTrace();

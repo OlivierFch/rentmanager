@@ -34,23 +34,23 @@
 										<th>Fin</th>
 										<th>Action</th>
 									</tr>
-									<c:forEach items="${listRents}" var="resa">
+									<c:forEach items="${listRents}" var="res">
 										<tr>
-											<td>${resa.id}.</td>
+											<td>${res.id}.</td>
 											<c:forEach items="${cars}" var="car">
-												<c:if test="${resa.idVehicle eq car.id}">
-													<td>${car.constructor}</td>
+												<c:if test="${res.idVehicle eq car.id}">
+													<td>${car.constructor} / ${car.nbPlaces} places</td>
 												</c:if>
 											</c:forEach>
 											<c:forEach items="${users}" var="user">
-												<c:if test="${resa.idClient eq user.id}">
-													<td>${user.firstname}${user.lastname}</td>
+												<c:if test="${res.idClient eq user.id}">
+													<td>${user.firstname} ${user.lastname}</td>
 												</c:if>
 											</c:forEach>
-											<td>${resa.debut}</td>
-											<td>${resa.end}</td>
+											<td>${res.debut}</td>
+											<td>${res.end}</td>
 											<td>
-												<a class="btn btn-danger" href="${pageContext.request.contextPath}/rents/delete?id=${resa.id}">
+												<a class="btn btn-danger" href="${pageContext.request.contextPath}/rents/delete?id=${res.id}">
 													<i class="fa fa-trash"></i>
 												</a>
 											</td>

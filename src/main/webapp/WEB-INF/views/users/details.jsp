@@ -62,13 +62,8 @@
                                                         <td>${car.constructor}</td>
                                                     </c:if>
                                                 </c:forEach>
-                                                <td>
-                                                    <fmt:parseDate value="${resa.debut}" pattern="yyyy-MM-dd" var="parsedDateTime" type="both" />
-                                                    <fmt:formatDate pattern="dd/MM/yyyy" value="${ parsedDateTime }" />
-                                                </td>
-                                                <td> <fmt:parseDate value="${resa.end}" pattern="yyyy-MM-dd" var="parsedDateTime" type="both" />
-                                                    <fmt:formatDate pattern="dd/MM/yyyy" value="${ parsedDateTime }" /></td>
-                                                <td>
+                                                <td>${resa.debut}</td>
+                                                <td>${resa.end}</td>
                                             </tr>
                                         </c:forEach>
                                     </table>

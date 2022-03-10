@@ -1,90 +1,122 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    <!DOCTYPE html>
-    <html>
-    <%@include file="/WEB-INF/views/common/head.jsp" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<!DOCTYPE html>
+<html>
+<%@include file="/WEB-INF/views/common/head.jsp"%>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
 
-        <body class="hold-transition skin-blue sidebar-mini">
-            <div class="wrapper">
+    <%@ include file="/WEB-INF/views/common/header.jsp" %>
+    <!-- Left side column. contains the logo and sidebar -->
+    <%@ include file="/WEB-INF/views/common/sidebar.jsp" %>
 
-                <%@ include file="/WEB-INF/views/common/header.jsp" %>
-                    <!-- Left side column. contains the logo and sidebar -->
-                    <%@ include file="/WEB-INF/views/common/sidebar.jsp" %>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-md-3">
+                    <!-- Profile Image -->
+                    <div class="box box-primary">
+                        <div class="box-body box-profile">
+                            <h3 class="profile-username text-center">${vehicle.constructor} / ${vehicle.nbPlaces} places</h3> 
 
-                        <!-- Content Wrapper. Contains page content -->
-                        <div class="content-wrapper">
-                            <!-- Content Header (Page header) -->
-                            <section class="content-header">
-                                <h1>
-                                    Reservations pour le vehicule :
-                                    <c:forEach items="${cars}" var="car">
-                                        <c:if test="${vehicule eq car.id}">
-                                            <td>${car.constructor}</td>
-                                        </c:if>
-                                    </c:forEach>
-                                </h1>
-                            </section>
-
-                            <!-- Main content -->
-                            <section class="content">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="box">
-                                            <div class="box-body no-padding">
-                                                <table class="table table-striped">
-                                                    <tr>
-                                                        <th style="width: 10px">#</th>
-                                                        <th>Voiture</th>
-                                                        <th>Client</th>
-                                                        <th>Debut</th>
-                                                        <th>Fin</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                    <c:forEach items="${res}" var="resa">
-                                                        <tr>
-                                                            <td>${resa.id}.</td>
-                                                            <c:forEach items="${cars}" var="car">
-                                                                <c:if test="${resa.idVehicle eq car.id}">
-                                                                    <td>${car.constructor}</td>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                            <c:forEach items="${users}" var="user">
-                                                                <c:if test="${resa.idClient eq user.id}">
-                                                                    <td>${user.firstname} ${user.lastname}</td>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                            <td>${resa.debut}</td>
-                                                            <td>${resa.end}</td>
-                                                            <td>
-                                                                <!--<a class="btn btn-primary" href="${pageContext.request.contextPath}/rents/detail?id=${resa.id}">
-                                            <i class="fa fa-play"></i>
-                                        </a>
-                                        <a class="btn btn-success" href="${pageContext.request.contextPath}/rents/update?id=${resa.id}">
-                                            <i class="fa fa-edit"></i>
-                                        </a>-->
-                                                                <a class="btn btn-danger"
-                                                                    href="${pageContext.request.contextPath}/rents/delete?id=${resa.id}">
-                                                                    <i class="fa fa-trash"></i>
-                                                                </a>
-                                                            </td>
-                                                        </tr>
-                                                    </c:forEach>
-                                                </table>
-                                            </div>
-                                            <!-- /.box-body -->
-                                        </div>
-                                        <!-- /.box -->
-                                    </div>
-                                    <!-- /.col -->
-                                </div>
-                            </section>
-                            <!-- /.content -->
+                            <ul class="list-group list-group-unbordered">
+                                <li class="list-group-item">
+                                    <b>Reservation(s): </b> <a class="pull-right">${fn:length(res)}</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Client(s): </b> <a class="pull-right">${fn:length(users)}</a>
+                                </li>
+                            </ul>
                         </div>
-
-                        <%@ include file="/WEB-INF/views/common/footer.jsp" %>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-9">
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#rents" data-toggle="tab">Reservations</a></li>
+                            <li><a href="#users" data-toggle="tab">Clients</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="active tab-pane" id="rents">
+                                <div class="box-body no-padding">
+                                    <table class="table table-striped">
+                                        <tr>
+                                            <th style="width: 10px">#</th>
+                                            <th>Client</th>
+                                            <th>Email</th>
+                                            <th>Date de debut</th>
+                                            <th>Date de fin</th>
+                                        </tr>
+                                        <c:forEach items="${res}" var="resa">
+                                            <tr>
+                                                <td>${resa.id}.</td>
+                                                <c:forEach items="${users}" var="user">
+                                                    <c:if test="${resa.idClient eq user.id}">
+                                                        <td>${user.firstname} ${user.lastname}</td>
+                                                        <td>${user.email}</td>
+                                                    </c:if>
+                                                </c:forEach>
+                                                <td>
+                                                    <fmt:parseDate value="${resa.debut}" pattern="yyyy-MM-dd" var="parsedDateTime" type="both" />
+                                                    <fmt:formatDate pattern="dd/MM/yyyy" value="${ parsedDateTime }" />
+                                                </td>
+                                                <td> <fmt:parseDate value="${resa.end}" pattern="yyyy-MM-dd" var="parsedDateTime" type="both" />
+                                                    <fmt:formatDate pattern="dd/MM/yyyy" value="${ parsedDateTime }" /></td>
+                                                <td>
+                                            </tr>
+                                        </c:forEach>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /.tab-pane -->
+                            <div class="tab-pane" id="users">
+                               
+                                <div class="box-body no-padding">
+                                    <table class="table table-striped">
+                                        <tr>
+                                            <th style="width: 10px">#</th>
+                                            <th>Nom</th>
+                                            <th>Prenom</th>
+                                            <th>Date de naissance</th>
+                                            <th>Email</th>
+                                        </tr>
+                                        <c:forEach items="${users}" var="user">
+                                        <tr>
+                                            <td> ${user.id}.</td>
+                                            <td>${user.lastname}</td>
+                                            <td>${user.firstname}</td>
+                                            <td>${user.birthdate}</td>
+                                            <td>${user.email}</td>
+                                        </tr>
+                                        </c:forEach>
+                                    </table>
+                                </div>
+                            </div> 
+                            <!-- /.tab-pane -->
+                        </div>
+                        <!-- /.tab-content -->
+                    </div>
+                    <!-- /.nav-tabs-custom -->
+                </div>
+                <!-- /.col -->
             </div>
-            <!-- ./wrapper -->
+            <!-- /.row -->
 
-            <%@ include file="/WEB-INF/views/common/js_imports.jsp" %>
-        </body>
+        </section>
+        <!-- /.content -->
+    </div>
 
-    </html>
+    <%@ include file="/WEB-INF/views/common/footer.jsp" %>
+</div>
+<!-- ./wrapper -->
+
+<%@ include file="/WEB-INF/views/common/js_imports.jsp" %>
+
+</body>
+</html>

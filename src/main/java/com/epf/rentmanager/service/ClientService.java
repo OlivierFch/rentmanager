@@ -80,7 +80,37 @@ public class ClientService {
 	public long updateClient(Client client) throws ServiceException {
 		
 		try {
+			
 			return this.clientDao.updateClient(client);
+			
+		} catch (DaoException e) {
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+	
+	
+	public List<Client> findClientByVehicleId(int vehicleId) throws ServiceException {
+		
+		try {
+			
+			return this.clientDao.findClientByVehicleId(vehicleId);
+			
+		} catch (DaoException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	
+	public int ageClient(int id) throws ServiceException {
+		
+		try {
+			
+			return this.clientDao.ageClients(id);
+			
 		} catch (DaoException e) {
 			e.printStackTrace();
 		}
