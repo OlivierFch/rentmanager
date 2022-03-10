@@ -41,7 +41,7 @@
 										<div class="col-sm-10">
 											<input type="text" class="form-control" id="firstname"
 												name="firstname" value="${user.firstname}"
-												placeholder="Prenom">
+												placeholder="Prenom" required>
 										</div>
 									</div>
 									<div class="form-group">
@@ -49,7 +49,7 @@
 
 										<div class="col-sm-10">
 											<input type="text" class="form-control" id="lastname"
-												name="lastname" value="${user.lastname}" placeholder="Nom">
+												name="lastname" value="${user.lastname}" placeholder="Nom" required>
 										</div>
 									</div>
 									<div class="form-group">
@@ -57,7 +57,7 @@
 
 										<div class="col-sm-10">
 											<input type="email" class="form-control" id="email"
-												name="email" value="${user.email}" placeholder="Email">
+												name="email" value="${user.email}" placeholder="Email" required>
 										</div>
 									</div>
 									<div class="form-group">
@@ -67,7 +67,7 @@
 										<div class="col-sm-10">
 											<input type="date" class="form-control" id="birthdate"
 												name="birthdate" value="${user.birthdate}"
-												placeholder="birthdate">
+												placeholder="birthdate" required>
 										</div>
 									</div>
 								</div>

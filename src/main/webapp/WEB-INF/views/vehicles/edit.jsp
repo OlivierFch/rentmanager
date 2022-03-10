@@ -40,14 +40,14 @@
 
 										<div class="col-sm-10">
 											<input type="text" class="form-control" id="constructeur"
-												name="constructeur" value="${car.constructor}" placeholder="Constructeur">
+												name="constructeur" value="${car.constructor}" placeholder="Constructeur" required>
 										</div>
 									</div>
 									<div class="form-group">
 										<label for="nb_places" class="col-sm-2 control-label">Nombre de places</label>
 
 										<div class="col-sm-10">
-											<input type="text" class="form-control" id="nb_places" name="nb_places" value="${car.nbPlaces}" placeholder="Nombre de places">
+											<input type="number" class="form-control" id="nb_places" name="nb_places" value="${car.nbPlaces}" placeholder="Nombre de places" min="2" max="8" required>
 										</div>
 									</div>
 								</div>

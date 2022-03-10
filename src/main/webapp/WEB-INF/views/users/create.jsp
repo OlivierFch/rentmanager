@@ -31,28 +31,28 @@
                                     <label for="lastname" class="col-sm-2 control-label">Nom</label>
 
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Nom">
+                                        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Nom" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="firstname" class="col-sm-2 control-label">Prenom</label>
 
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Prenom">
+                                        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Prenom" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="email" class="col-sm-2 control-label">Email</label>
 
                                     <div class="col-sm-10">
-                                        <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="email" class="col-sm-2 control-label">Date de naissance</label>
 
                                     <div class="col-sm-10">
-                                        <input type="date" class="form-control" id="birthdate" name="birthdate" placeholder="birthdate">
+                                        <input type="date" class="form-control" id="birthdate" name="birthdate" placeholder="birthdate" required>
                                     </div>
                                 </div>
                             </div>
