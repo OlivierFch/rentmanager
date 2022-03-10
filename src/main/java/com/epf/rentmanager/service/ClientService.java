@@ -104,18 +104,4 @@ public class ClientService {
 		return null;
 	}
 	
-	
-	public int ageClient(int id) throws ServiceException {
-		
-		try {
-			
-			return this.clientDao.ageClients(id);
-			
-		} catch (DaoException e) {
-			e.printStackTrace();
-		}
-		
-		return 0;
-	}
-	
 }

@@ -41,7 +41,7 @@
 										<div class="col-sm-10">
 											<input type="text" class="form-control" id="firstname"
 												name="firstname" value="${user.firstname}"
-												placeholder="Prenom" required>
+												placeholder="Prenom" minLength="3" required>
 										</div>
 									</div>
 									<div class="form-group">
@@ -49,7 +49,7 @@
 
 										<div class="col-sm-10">
 											<input type="text" class="form-control" id="lastname"
-												name="lastname" value="${user.lastname}" placeholder="Nom" required>
+												name="lastname" value="${user.lastname}" placeholder="Nom" minLength="3" required>
 										</div>
 									</div>
 									<div class="form-group">

@@ -31,14 +31,14 @@
                                     <label for="lastname" class="col-sm-2 control-label">Nom</label>
 
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Nom" required>
+                                        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Nom" minLength="3" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="firstname" class="col-sm-2 control-label">Prenom</label>
 
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Prenom" required>
+                                        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Prenom" minLength="3" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -52,7 +52,7 @@
                                     <label for="email" class="col-sm-2 control-label">Date de naissance</label>
 
                                     <div class="col-sm-10">
-                                        <input type="date" class="form-control" id="birthdate" name="birthdate" required>
+                                        <input type="date" class="form-control" id="birthdate" name="birthdate" onchange="verifyAge()" required>
                                     </div>
                                 </div>
                             </div>
@@ -76,5 +76,17 @@
 <!-- ./wrapper -->
 
 <%@ include file="/WEB-INF/views/common/js_imports.jsp" %>
+
+<script>
+    function verifyAge(){
+        var Bdate = document.getElementById('birthdate').value;
+        var Bday = +new Date(Bdate);
+        if(((Date.now() - Bday) / (31557600000)) > 18){
+            document.getElementById('addbtn').disabled = false;
+        } else{
+            document.getElementById('addbtn').disabled = true;
+        }
+    } 
+</script>
 </body>
 </html>

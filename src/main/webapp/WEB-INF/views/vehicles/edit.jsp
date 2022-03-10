@@ -47,7 +47,7 @@
 										<label for="nb_places" class="col-sm-2 control-label">Nombre de places</label>
 
 										<div class="col-sm-10">
-											<input type="number" class="form-control" id="nb_places" name="nb_places" value="${car.nbPlaces}" placeholder="Nombre de places" min="2" max="8" required>
+											<input type="number" class="form-control" id="nb_places" name="nb_places" value="${car.nbPlaces}" placeholder="Nombre de places" min="2" max="9" required>
 										</div>
 									</div>
 								</div>
