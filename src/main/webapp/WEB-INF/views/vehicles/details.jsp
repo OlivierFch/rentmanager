@@ -20,7 +20,7 @@
                     <!-- Profile Image -->
                     <div class="box box-primary">
                         <div class="box-body box-profile">
-                            <h3 class="profile-username text-center">${vehicle.constructor} / ${vehicle.nbPlaces} places</h3> 
+                            <h3 class="profile-username text-center">${vehicule.constructor} / ${vehicule.nbPlaces} places</h3> 
 
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item">
@@ -58,7 +58,7 @@
                                                 <td>${resa.id}.</td>
                                                 <c:forEach items="${users}" var="user">
                                                     <c:if test="${resa.idClient eq user.id}">
-                                                        <td>${user.firstname} ${user.lastname}</td>
+                                                        <td>${user.lastname} ${user.firstname}</td>
                                                         <td>${user.email}</td>
                                                     </c:if>
                                                 </c:forEach>

@@ -49,16 +49,19 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="email" class="col-sm-2 control-label">Date de naissance</label>
+                                    <label for="birthdate" class="col-sm-2 control-label">Date de naissance</label>
 
                                     <div class="col-sm-10">
-                                        <input type="date" class="form-control" id="birthdate" name="birthdate" onchange="verifyAge()" required>
+                                        <input type="date" class="form-control" id="birthdate" name="birthdate" onchange="checkAge()" required>
                                     </div>
+                                </div>
+                                <div class="alert alert-danger" role="alert" id="warningSection">
+                                    Il faut avoir 18 ans minimum ! 
                                 </div>
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer">
-                                <button type="submit" class="btn btn-info pull-right">Ajouter</button>
+                                <button type="submit" class="btn btn-info pull-right" id="btn_add">Ajouter</button>
                             </div>
                             <!-- /.box-footer -->
                         </form>
@@ -78,15 +81,18 @@
 <%@ include file="/WEB-INF/views/common/js_imports.jsp" %>
 
 <script>
-    function verifyAge(){
+    function checkAge(){
         var Bdate = document.getElementById('birthdate').value;
         var Bday = +new Date(Bdate);
         if(((Date.now() - Bday) / (31557600000)) > 18){
-            document.getElementById('addbtn').disabled = false;
+            document.getElementById('btn_add').disabled = false;
+            document.getElementById('warningSection').hidden = true;
         } else{
-            document.getElementById('addbtn').disabled = true;
+            document.getElementById('btn_add').disabled = true;
+            document.getElementById('warningSection').hidden = false;
         }
     } 
 </script>
+
 </body>
 </html>

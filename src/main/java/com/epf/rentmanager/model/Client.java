@@ -9,7 +9,7 @@ public class Client {
 	private String email;
 	private LocalDate birthdate;
 
-	public Client(long id, String firstname, String lastname, String email, LocalDate birthdate) {
+	public Client(long id, String lastname, String firstname, String email, LocalDate birthdate) {
 		super();
 		this.id = id;
 		this.firstname = firstname;
@@ -19,7 +19,7 @@ public class Client {
 	}
 	
 
-	public Client(String firstname, String lastname, String email, LocalDate birthdate) {
+	public Client(String lastname, String firstname, String email, LocalDate birthdate) {
 		super();
 		this.firstname = firstname;
 		this.lastname = lastname;
