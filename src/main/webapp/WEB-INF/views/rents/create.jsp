@@ -63,10 +63,13 @@
                                         <input type="date" class="form-control" id="fin" name="fin" required>
                                     </div>
                                 </div>
+                                <div class="alert alert-danger" role="alert"
+										id="warningSection" style="display: none">Pas plus de 7 jours de suite !
+									</div>
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer">
-                                <button type="submit" class="btn btn-info pull-right">Ajouter</button>
+                                <button type="submit" class="btn btn-info pull-right" id="add_btn">Ajouter</button>
                             </div>
                             <!-- /.box-footer -->
                         </form>
@@ -84,5 +87,46 @@
 <!-- ./wrapper -->
 
 <%@ include file="/WEB-INF/views/common/js_imports.jsp" %>
+
+<script src="${pageContext.request.contextPath}/resources/plugins/input-mask/jquery.inputmask.js"></script>
+<script src="${pageContext.request.contextPath}/resources/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script src="${pageContext.request.contextPath}/resources/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+
+<script>
+    $(function () {
+        $('[data-mask]').inputmask()
+    });
+    $('#debut').on('change',()=>{
+        if ($('#fin').val()){
+            var date1 = new Date($('#fin').val());
+            var date2 = new Date($('#debut').val());
+            var diffTime = Math.abs(date2 - date1);
+            var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            if(diffDays>7){
+                document.getElementById('add_btn').disabled = true;
+                document.getElementById('warningSection').style.display = 'block';
+            } else {
+                document.getElementById('add_btn').disabled = false;
+                document.getElementById('warningSection').style.display = 'none';
+            }
+        }
+    });
+    $('#fin').on('change',()=>{
+        if ($('#debut').val()){
+            var date1 = new Date($('#fin').val());
+            var date2 = new Date($('#debut').val());
+            var diffTime = Math.abs(date2 - date1);
+            var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            if(diffDays>7){
+                document.getElementById('add_btn').disabled = true;
+                document.getElementById('warningSection').style.display = 'block';
+            } else {
+                document.getElementById('add_btn').disabled = false;
+                document.getElementById('warningSection').style.display = 'none';
+            }
+        }
+    });
+</script>
+
 </body>
 </html>
