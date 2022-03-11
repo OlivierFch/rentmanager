@@ -6,7 +6,7 @@ http://localhost:8080/rentmanager
 
 ## Fonctionnalités réussies
 ### Affichage
-* Dashboard / Home avec les 3 counts (cliquables)
+* Dashboard / Home avec les 3 counts
 * Opérations CRUD pour les clients
 * Opérations CRUD pour les véhicules
 * Opérations CRD pour les réservations
@@ -19,8 +19,12 @@ http://localhost:8080/rentmanager
 * Un client n'ayant pas 18 ans ne peut pas être créé
 * Le nom et le prénom d'un client doivent faire au moins 3 caractères
 * Un client ayant une adresse mail déjà prise ne peut pas être créé
+* Une voiture ne peux pas être réservé plus de 7 jours de suite par le même utilisateur
 
 ## Fonctionnalités non réussies
 * Une voiture ne peux pas être réservé 2 fois le même jour
 * Une voiture ne peux pas être réservé 30 jours de suite sans pause
-* Une voiture ne peux pas être réservé plus de 7 jours de suite par le même utilisateur
+
+## Que du bonus !
+* Dashboard cliquable
+* Message d'erreurs dans les formulaires (type Mail existant, avoir plus de 18 ans et ne pas faire une réservation de plus de 7 jours)
