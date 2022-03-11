@@ -45,7 +45,7 @@
                                     <label for="email" class="col-sm-2 control-label">Email</label>
 
                                     <div class="col-sm-10">
-                                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" onchange="checkEmail()" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -55,8 +55,11 @@
                                         <input type="date" class="form-control" id="birthdate" name="birthdate" onchange="checkAge()" required>
                                     </div>
                                 </div>
-                                <div class="alert alert-danger" role="alert" id="warningSection">
+                                <div class="alert alert-danger" role="alert" id="warningAgeSection" style="display: none">
                                     Il faut avoir 18 ans minimum ! 
+                                </div>
+                                <div class="alert alert-danger" role="alert" id="warningEmailSection" style="display: none">
+                                    Cet email est déjà utilisé ! 
                                 </div>
                             </div>
                             <!-- /.box-body -->
@@ -86,12 +89,24 @@
         var Bday = +new Date(Bdate);
         if(((Date.now() - Bday) / (31557600000)) > 18){
             document.getElementById('btn_add').disabled = false;
-            document.getElementById('warningSection').hidden = true;
+            document.getElementById('warningAgeSection').style.display = 'none';
         } else{
             document.getElementById('btn_add').disabled = true;
-            document.getElementById('warningSection').hidden = false;
+            document.getElementById('warningAgeSection').style.display = 'block';
         }
-    } 
+    }
+    
+    function checkEmail(){
+    	var Email = document.getElementById('email').value;
+    	if (Email === user.email){
+    		document.getElementById('btn_add').disabled = true;
+    		document.getElementById('warningEmailSection').style.display = 'none';
+    	}
+    	else{
+    		document.getElementById('btn_add').disabled = false;
+    		document.getElementById('warningEmailSection').style.display = 'block';
+    	}
+    }
 </script>
 
 </body>

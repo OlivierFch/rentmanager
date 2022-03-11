@@ -36,6 +36,14 @@ public class UserCreateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		try {
+			
+			request.setAttribute("user", this.clientService.findAll());
+			
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+		
 		this.getServletContext().getRequestDispatcher(VUE_CREATE_USERS).forward(request, response);
 		
 	}
