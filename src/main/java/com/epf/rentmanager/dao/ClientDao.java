@@ -31,7 +31,8 @@ public class ClientDao {
 	private static final String COUNT_CLIENTS_QUERY = "SELECT COUNT(*) FROM Client";
 	private static final String UPDATE_CLIENT_QUERY = "UPDATE Client SET nom = ?, prenom = ?, email = ?, naissance = ? WHERE id = ?;";
 	private static final String FIND_RESERVATIONS_CLIENT_BY_VEHICLE_QUERY = "SELECT * FROM Reservation INNER JOIN Client ON Reservation.client_id = Client.id WHERE vehicle_id=?;";
-
+	
+	
 	public int countAllClient() throws DaoException {
 		
 		int count = 0;

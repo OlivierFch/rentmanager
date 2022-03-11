@@ -28,6 +28,12 @@ public class Client {
 	}
 	
 
+	public Client(long id, String email) {
+		super();
+		this.id = id;
+		this.email = email;
+	}
+
 
 	public long getId() {
 		return id;

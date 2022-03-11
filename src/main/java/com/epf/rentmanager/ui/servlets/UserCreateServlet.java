@@ -38,12 +38,11 @@ public class UserCreateServlet extends HttpServlet {
 		
 		try {
 			
-			request.setAttribute("user", this.clientService.findAll());
+			request.setAttribute("users", this.clientService.findAll());
 			
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
-		
 		this.getServletContext().getRequestDispatcher(VUE_CREATE_USERS).forward(request, response);
 		
 	}

@@ -21,6 +21,7 @@ public class ClientService {
 		this.clientDao = clientDao;
 	}
 	
+	
 	public int countAll()
 	{
 		try {
