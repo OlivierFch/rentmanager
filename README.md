@@ -8,7 +8,7 @@ http://localhost:8080/rentmanager
 * Opérations CRUD pour les clients
 * Opérations CRUD pour les véhicules
 * Opérations CRD pour les réservations
-* Affichage des détails pour les clients et les véhicules
+* Affichage des détails pour les clients et les véhicules (liste de toutes les réservations selon un client ou un véhicule spécifique)
 * Réalisation de 3 tests
 
 * Contraintes :
@@ -17,8 +17,6 @@ http://localhost:8080/rentmanager
 3. Lorsqu'un client ou un véhicule est supprimé, les réservations relatives le sont aussi.
 4. Un client n'ayant pas 18 ans ne peut pas être crée
 5. Le nom et le prénom d'un client doivent faire au moins 3 caractères
-6. Liste de toutes les réservations selon un client spécifique
-7. Liste de toutes les réservations selon un véhicule spécifique
 
 ## Fonctionnalités non réussies
 * Une voiture ne peux pas être réservé 2 fois le même jour
