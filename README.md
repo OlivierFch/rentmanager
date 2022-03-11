@@ -15,7 +15,7 @@ http://localhost:8080/rentmanager
 1. Validation du formulaire de création, en respectant la syntaxe de l'email, des dates, âge du client devant être majeur (>18ans).
 2. Nombre de places dans un véhicule restreint entre minimum 2 et 9 maximum.
 3. Lorsqu'un client ou un véhicule est supprimé, les réservations relatives le sont aussi.
-4. Un client n'ayant pas 18 ans ne peut pas être crée
+4. Un client n'ayant pas 18 ans ne peut pas être créé
 5. Le nom et le prénom d'un client doivent faire au moins 3 caractères
 
 ## Fonctionnalités non réussies
